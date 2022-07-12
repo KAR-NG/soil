@@ -33,7 +33,9 @@ library(cowplot)
 Randomly sample 10 rows of data from the table
 
 ```{r}
-sample_n(Soils, 10)
+sample_n(Soils, 10) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("bordered", "stripped", "hover"), full_width = F)
 
 ```
 

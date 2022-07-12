@@ -29,31 +29,861 @@ library(cowplot)
 Randomly sample 10 rows of data from the table
 
 ``` r
-sample_n(Soils, 10)
+sample_n(Soils, 10) %>% 
+  kbl() %>%
+  kable_styling(bootstrap_options = c("bordered", "stripped", "hover"), full_width = F)
 ```
 
-    ##    Group    Contour Depth Gp Block   pH     N Dens   P    Ca   Mg    K   Na
-    ## 37    10 Depression 10-30 D1     1 4.46 0.087 1.24 276  7.24 9.40 0.43 4.17
-    ## 18     5      Slope  0-10 S0     2 5.46 0.298 0.96 300 12.30 7.50 0.68 2.00
-    ## 36     9 Depression  0-10 D0     4 5.67 0.127 1.13 248  9.12 7.04 0.55 1.43
-    ## 39    10 Depression 10-30 D1     3 4.79 0.047 1.46 121  6.99 9.91 0.30 5.15
-    ## 14     4        Top 60-90 T6     2 4.07 0.046 1.54  91  3.82 6.61 0.50 7.67
-    ## 27     7      Slope 30-60 S3     3 4.12 0.086 1.55 148  6.16 7.58 0.16 6.39
-    ## 2      1        Top  0-10 T0     2 5.65 0.165 1.04 208 12.25 5.15 0.71 0.94
-    ## 11     3        Top 30-60 T3     3 4.17 0.078 1.26 112  6.29 7.95 0.26 5.30
-    ## 5      2        Top 10-30 T1     1 5.14 0.164 1.12 174 14.17 8.12 0.70 2.17
-    ## 1      1        Top  0-10 T0     1 5.40 0.188 0.92 215 16.35 7.65 0.72 1.14
-    ##    Conduc
-    ## 37   5.08
-    ## 18   1.98
-    ## 36   0.67
-    ## 39   6.82
-    ## 14  10.07
-    ## 27   9.07
-    ## 2    1.35
-    ## 11   8.37
-    ## 5    1.85
-    ## 1    1.09
+<table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+
+Group
+
+</th>
+<th style="text-align:left;">
+
+Contour
+
+</th>
+<th style="text-align:left;">
+
+Depth
+
+</th>
+<th style="text-align:left;">
+
+Gp
+
+</th>
+<th style="text-align:left;">
+
+Block
+
+</th>
+<th style="text-align:right;">
+
+pH
+
+</th>
+<th style="text-align:right;">
+
+N
+
+</th>
+<th style="text-align:right;">
+
+Dens
+
+</th>
+<th style="text-align:right;">
+
+P
+
+</th>
+<th style="text-align:right;">
+
+Ca
+
+</th>
+<th style="text-align:right;">
+
+Mg
+
+</th>
+<th style="text-align:right;">
+
+K
+
+</th>
+<th style="text-align:right;">
+
+Na
+
+</th>
+<th style="text-align:right;">
+
+Conduc
+
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+
+25
+
+</td>
+<td style="text-align:left;">
+
+7
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+S3
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+3.96
+
+</td>
+<td style="text-align:right;">
+
+0.059
+
+</td>
+<td style="text-align:right;">
+
+1.53
+
+</td>
+<td style="text-align:right;">
+
+98
+
+</td>
+<td style="text-align:right;">
+
+4.80
+
+</td>
+<td style="text-align:right;">
+
+10.00
+
+</td>
+<td style="text-align:right;">
+
+0.36
+
+</td>
+<td style="text-align:right;">
+
+6.52
+
+</td>
+<td style="text-align:right;">
+
+7.72
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+13
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+T6
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+3.88
+
+</td>
+<td style="text-align:right;">
+
+0.077
+
+</td>
+<td style="text-align:right;">
+
+1.25
+
+</td>
+<td style="text-align:right;">
+
+127
+
+</td>
+<td style="text-align:right;">
+
+6.41
+
+</td>
+<td style="text-align:right;">
+
+10.96
+
+</td>
+<td style="text-align:right;">
+
+0.56
+
+</td>
+<td style="text-align:right;">
+
+9.67
+
+</td>
+<td style="text-align:right;">
+
+10.64
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+12
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+T3
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+3.89
+
+</td>
+<td style="text-align:right;">
+
+0.070
+
+</td>
+<td style="text-align:right;">
+
+1.42
+
+</td>
+<td style="text-align:right;">
+
+117
+
+</td>
+<td style="text-align:right;">
+
+6.61
+
+</td>
+<td style="text-align:right;">
+
+9.76
+
+</td>
+<td style="text-align:right;">
+
+0.41
+
+</td>
+<td style="text-align:right;">
+
+8.30
+
+</td>
+<td style="text-align:right;">
+
+9.21
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+21
+
+</td>
+<td style="text-align:left;">
+
+6
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+10-30
+
+</td>
+<td style="text-align:left;">
+
+S1
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+4.57
+
+</td>
+<td style="text-align:right;">
+
+0.102
+
+</td>
+<td style="text-align:right;">
+
+1.37
+
+</td>
+<td style="text-align:right;">
+
+156
+
+</td>
+<td style="text-align:right;">
+
+8.58
+
+</td>
+<td style="text-align:right;">
+
+9.92
+
+</td>
+<td style="text-align:right;">
+
+0.63
+
+</td>
+<td style="text-align:right;">
+
+3.67
+
+</td>
+<td style="text-align:right;">
+
+3.24
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+9
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+T3
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+4.37
+
+</td>
+<td style="text-align:right;">
+
+0.112
+
+</td>
+<td style="text-align:right;">
+
+1.07
+
+</td>
+<td style="text-align:right;">
+
+121
+
+</td>
+<td style="text-align:right;">
+
+8.85
+
+</td>
+<td style="text-align:right;">
+
+10.35
+
+</td>
+<td style="text-align:right;">
+
+0.74
+
+</td>
+<td style="text-align:right;">
+
+5.74
+
+</td>
+<td style="text-align:right;">
+
+5.73
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+45
+
+</td>
+<td style="text-align:left;">
+
+12
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+D6
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+3.82
+
+</td>
+<td style="text-align:right;">
+
+0.038
+
+</td>
+<td style="text-align:right;">
+
+1.40
+
+</td>
+<td style="text-align:right;">
+
+105
+
+</td>
+<td style="text-align:right;">
+
+4.65
+
+</td>
+<td style="text-align:right;">
+
+9.85
+
+</td>
+<td style="text-align:right;">
+
+0.18
+
+</td>
+<td style="text-align:right;">
+
+10.15
+
+</td>
+<td style="text-align:right;">
+
+12.26
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+16
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+T6
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+3.74
+
+</td>
+<td style="text-align:right;">
+
+0.053
+
+</td>
+<td style="text-align:right;">
+
+1.40
+
+</td>
+<td style="text-align:right;">
+
+79
+
+</td>
+<td style="text-align:right;">
+
+5.86
+
+</td>
+<td style="text-align:right;">
+
+10.14
+
+</td>
+<td style="text-align:right;">
+
+0.41
+
+</td>
+<td style="text-align:right;">
+
+11.04
+
+</td>
+<td style="text-align:right;">
+
+12.15
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+17
+
+</td>
+<td style="text-align:left;">
+
+5
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+S0
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+5.11
+
+</td>
+<td style="text-align:right;">
+
+0.247
+
+</td>
+<td style="text-align:right;">
+
+0.94
+
+</td>
+<td style="text-align:right;">
+
+261
+
+</td>
+<td style="text-align:right;">
+
+13.25
+
+</td>
+<td style="text-align:right;">
+
+7.55
+
+</td>
+<td style="text-align:right;">
+
+0.61
+
+</td>
+<td style="text-align:right;">
+
+1.86
+
+</td>
+<td style="text-align:right;">
+
+2.61
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+36
+
+</td>
+<td style="text-align:left;">
+
+9
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+D0
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+5.67
+
+</td>
+<td style="text-align:right;">
+
+0.127
+
+</td>
+<td style="text-align:right;">
+
+1.13
+
+</td>
+<td style="text-align:right;">
+
+248
+
+</td>
+<td style="text-align:right;">
+
+9.12
+
+</td>
+<td style="text-align:right;">
+
+7.04
+
+</td>
+<td style="text-align:right;">
+
+0.55
+
+</td>
+<td style="text-align:right;">
+
+1.43
+
+</td>
+<td style="text-align:right;">
+
+0.67
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+22
+
+</td>
+<td style="text-align:left;">
+
+6
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+10-30
+
+</td>
+<td style="text-align:left;">
+
+S1
+
+</td>
+<td style="text-align:left;">
+
+2
+
+</td>
+<td style="text-align:right;">
+
+5.11
+
+</td>
+<td style="text-align:right;">
+
+0.097
+
+</td>
+<td style="text-align:right;">
+
+1.30
+
+</td>
+<td style="text-align:right;">
+
+139
+
+</td>
+<td style="text-align:right;">
+
+8.58
+
+</td>
+<td style="text-align:right;">
+
+8.69
+
+</td>
+<td style="text-align:right;">
+
+0.42
+
+</td>
+<td style="text-align:right;">
+
+4.70
+
+</td>
+<td style="text-align:right;">
+
+4.63
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ## 2.2 Data Description
 
