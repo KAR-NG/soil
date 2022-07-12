@@ -8,11 +8,7 @@ output:
     toc_depth: 4
     df_print: paged
     number_sections: yes
-  always_allow_html: yes
-  html_document:
-    toc: yes
-    toc_depth: '4'
-    df_print: paged
+always_allow_html: yes
 ---
 
 ***
