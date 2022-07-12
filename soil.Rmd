@@ -6,7 +6,6 @@ output:
   github_document:
     toc: yes
     toc_depth: 4
-    df_print: paged
     number_sections: yes
 always_allow_html: yes
 ---
@@ -73,6 +72,7 @@ data.frame(Variables, Description) %>%
 
 ```{r}
 glimpse(Soils)
+
 ```
 There is no missing value in the data set. 
 
