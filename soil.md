@@ -12,7 +12,14 @@ Kar
     -   [3.1 Removing Group and Gp](#31-removing-group-and-gp)
     -   [3.2 Rearrange](#32-rearrange)
     -   [3.3 Trimming](#33-trimming)
--   [4 VISUALISATION](#4-visualisation)
+    -   [3.4 Rearrange levels](#34-rearrange-levels)
+-   [4 EXPLORATORY DATA ANALYSIS](#4-exploratory-data-analysis)
+    -   [4.1 Soil Chemistries against Soil
+        Depth](#41-soil-chemistries-against-soil-depth)
+    -   [4.2 Soil Chemistries against
+        Contour](#42-soil-chemistries-against-contour)
+    -   [4.3 PCA for characterisation](#43-pca-for-characterisation)
+-   [5 STATISTICAL ANALYSIS](#5-statistical-analysis)
 
 ------------------------------------------------------------------------
 
@@ -25,6 +32,9 @@ library(tidyverse)
 library(car)
 library(kableExtra)
 library(cowplot)
+library(gridExtra)
+library(factoextra)
+library(FactoMineR)
 ```
 
 # 2 DATA PREPARATION
@@ -120,12 +130,12 @@ Conduc
 <tr>
 <td style="text-align:left;">
 
-36
+41
 
 </td>
 <td style="text-align:left;">
 
-9
+11
 
 </td>
 <td style="text-align:left;">
@@ -135,243 +145,166 @@ Depression
 </td>
 <td style="text-align:left;">
 
-0-10
-
-</td>
-<td style="text-align:left;">
-
-D0
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-5.67
-
-</td>
-<td style="text-align:right;">
-
-0.127
-
-</td>
-<td style="text-align:right;">
-
-1.13
-
-</td>
-<td style="text-align:right;">
-
-248
-
-</td>
-<td style="text-align:right;">
-
-9.12
-
-</td>
-<td style="text-align:right;">
-
-7.04
-
-</td>
-<td style="text-align:right;">
-
-0.55
-
-</td>
-<td style="text-align:right;">
-
-1.43
-
-</td>
-<td style="text-align:right;">
-
-0.67
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-22
-
-</td>
-<td style="text-align:left;">
-
-6
-
-</td>
-<td style="text-align:left;">
-
-Slope
-
-</td>
-<td style="text-align:left;">
-
-10-30
-
-</td>
-<td style="text-align:left;">
-
-S1
-
-</td>
-<td style="text-align:left;">
-
-2
-
-</td>
-<td style="text-align:right;">
-
-5.11
-
-</td>
-<td style="text-align:right;">
-
-0.097
-
-</td>
-<td style="text-align:right;">
-
-1.30
-
-</td>
-<td style="text-align:right;">
-
-139
-
-</td>
-<td style="text-align:right;">
-
-8.58
-
-</td>
-<td style="text-align:right;">
-
-8.69
-
-</td>
-<td style="text-align:right;">
-
-0.42
-
-</td>
-<td style="text-align:right;">
-
-4.70
-
-</td>
-<td style="text-align:right;">
-
-4.63
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-24
-
-</td>
-<td style="text-align:left;">
-
-6
-
-</td>
-<td style="text-align:left;">
-
-Slope
-
-</td>
-<td style="text-align:left;">
-
-10-30
-
-</td>
-<td style="text-align:left;">
-
-S1
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-6.67
-
-</td>
-<td style="text-align:right;">
-
-0.083
-
-</td>
-<td style="text-align:right;">
-
-1.42
-
-</td>
-<td style="text-align:right;">
-
-132
-
-</td>
-<td style="text-align:right;">
-
-12.68
-
-</td>
-<td style="text-align:right;">
-
-9.56
-
-</td>
-<td style="text-align:right;">
-
-0.55
-
-</td>
-<td style="text-align:right;">
-
-8.30
-
-</td>
-<td style="text-align:right;">
-
-8.10
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-28
-
-</td>
-<td style="text-align:left;">
-
-7
-
-</td>
-<td style="text-align:left;">
-
-Slope
-
-</td>
-<td style="text-align:left;">
-
 30-60
 
 </td>
 <td style="text-align:left;">
 
-S3
+D3
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+3.94
+
+</td>
+<td style="text-align:right;">
+
+0.054
+
+</td>
+<td style="text-align:right;">
+
+1.60
+
+</td>
+<td style="text-align:right;">
+
+148
+
+</td>
+<td style="text-align:right;">
+
+4.85
+
+</td>
+<td style="text-align:right;">
+
+9.62
+
+</td>
+<td style="text-align:right;">
+
+0.18
+
+</td>
+<td style="text-align:right;">
+
+7.20
+
+</td>
+<td style="text-align:right;">
+
+10.14
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+T0
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+5.40
+
+</td>
+<td style="text-align:right;">
+
+0.188
+
+</td>
+<td style="text-align:right;">
+
+0.92
+
+</td>
+<td style="text-align:right;">
+
+215
+
+</td>
+<td style="text-align:right;">
+
+16.35
+
+</td>
+<td style="text-align:right;">
+
+7.65
+
+</td>
+<td style="text-align:right;">
+
+0.72
+
+</td>
+<td style="text-align:right;">
+
+1.14
+
+</td>
+<td style="text-align:right;">
+
+1.09
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+48
+
+</td>
+<td style="text-align:left;">
+
+12
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+D6
 
 </td>
 <td style="text-align:left;">
@@ -381,54 +314,54 @@ S3
 </td>
 <td style="text-align:right;">
 
-4.99
+4.41
 
 </td>
 <td style="text-align:right;">
 
-0.048
+0.058
 
 </td>
 <td style="text-align:right;">
 
-1.46
+1.58
 
 </td>
 <td style="text-align:right;">
 
-97
+130
 
 </td>
 <td style="text-align:right;">
 
-7.49
+4.58
 
 </td>
 <td style="text-align:right;">
 
-9.38
+9.46
 
 </td>
 <td style="text-align:right;">
 
-0.40
+0.14
 
 </td>
 <td style="text-align:right;">
 
-9.70
+9.28
 
 </td>
 <td style="text-align:right;">
 
-9.13
+12.69
 
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 
-13
+16
 
 </td>
 <td style="text-align:left;">
@@ -453,64 +386,64 @@ T6
 </td>
 <td style="text-align:left;">
 
-1
+4
 
 </td>
 <td style="text-align:right;">
 
-3.88
+3.74
 
 </td>
 <td style="text-align:right;">
 
-0.077
+0.053
 
 </td>
 <td style="text-align:right;">
 
-1.25
+1.40
 
 </td>
 <td style="text-align:right;">
 
-127
+79
 
 </td>
 <td style="text-align:right;">
 
-6.41
+5.86
 
 </td>
 <td style="text-align:right;">
 
-10.96
+10.14
 
 </td>
 <td style="text-align:right;">
 
-0.56
+0.41
 
 </td>
 <td style="text-align:right;">
 
-9.67
+11.04
 
 </td>
 <td style="text-align:right;">
 
-10.64
+12.15
 
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
 
-33
+47
 
 </td>
 <td style="text-align:left;">
 
-9
+12
 
 </td>
 <td style="text-align:left;">
@@ -520,62 +453,62 @@ Depression
 </td>
 <td style="text-align:left;">
 
-0-10
+60-90
 
 </td>
 <td style="text-align:left;">
 
-D0
+D6
 
 </td>
 <td style="text-align:left;">
 
-1
+3
 
 </td>
 <td style="text-align:right;">
 
-5.24
+4.22
 
 </td>
 <td style="text-align:right;">
 
-0.194
+0.030
 
 </td>
 <td style="text-align:right;">
 
-1.00
+1.56
 
 </td>
 <td style="text-align:right;">
 
-445
+97
 
 </td>
 <td style="text-align:right;">
 
-12.27
+5.29
 
 </td>
 <td style="text-align:right;">
 
-6.27
+8.37
 
 </td>
 <td style="text-align:right;">
 
-0.72
+0.14
 
 </td>
 <td style="text-align:right;">
 
-1.02
+8.27
 
 </td>
 <td style="text-align:right;">
 
-0.75
+9.51
 
 </td>
 </tr>
@@ -659,89 +592,12 @@ S0
 <tr>
 <td style="text-align:left;">
 
-15
+22
 
 </td>
 <td style="text-align:left;">
 
-4
-
-</td>
-<td style="text-align:left;">
-
-Top
-
-</td>
-<td style="text-align:left;">
-
-60-90
-
-</td>
-<td style="text-align:left;">
-
-T6
-
-</td>
-<td style="text-align:left;">
-
-3
-
-</td>
-<td style="text-align:right;">
-
-3.88
-
-</td>
-<td style="text-align:right;">
-
-0.055
-
-</td>
-<td style="text-align:right;">
-
-1.53
-
-</td>
-<td style="text-align:right;">
-
-91
-
-</td>
-<td style="text-align:right;">
-
-4.98
-
-</td>
-<td style="text-align:right;">
-
-8.00
-
-</td>
-<td style="text-align:right;">
-
-0.23
-
-</td>
-<td style="text-align:right;">
-
-8.78
-
-</td>
-<td style="text-align:right;">
-
-11.26
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-20
-
-</td>
-<td style="text-align:left;">
-
-5
+6
 
 </td>
 <td style="text-align:left;">
@@ -751,69 +607,12 @@ Slope
 </td>
 <td style="text-align:left;">
 
-0-10
+10-30
 
 </td>
 <td style="text-align:left;">
 
-S0
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-5.85
-
-</td>
-<td style="text-align:right;">
-
-0.186
-
-</td>
-<td style="text-align:right;">
-
-1.20
-
-</td>
-<td style="text-align:right;">
-
-229
-
-</td>
-<td style="text-align:right;">
-
-13.78
-
-</td>
-<td style="text-align:right;">
-
-7.12
-
-</td>
-<td style="text-align:right;">
-
-0.62
-
-</td>
-<td style="text-align:right;">
-
-3.09
-
-</td>
-<td style="text-align:right;">
-
-2.85
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-5
+S1
 
 </td>
 <td style="text-align:left;">
@@ -821,9 +620,220 @@ S0
 2
 
 </td>
+<td style="text-align:right;">
+
+5.11
+
+</td>
+<td style="text-align:right;">
+
+0.097
+
+</td>
+<td style="text-align:right;">
+
+1.30
+
+</td>
+<td style="text-align:right;">
+
+139
+
+</td>
+<td style="text-align:right;">
+
+8.58
+
+</td>
+<td style="text-align:right;">
+
+8.69
+
+</td>
+<td style="text-align:right;">
+
+0.42
+
+</td>
+<td style="text-align:right;">
+
+4.70
+
+</td>
+<td style="text-align:right;">
+
+4.63
+
+</td>
+</tr>
+<tr>
 <td style="text-align:left;">
 
-Top
+46
+
+</td>
+<td style="text-align:left;">
+
+12
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+D6
+
+</td>
+<td style="text-align:left;">
+
+2
+
+</td>
+<td style="text-align:right;">
+
+4.24
+
+</td>
+<td style="text-align:right;">
+
+0.035
+
+</td>
+<td style="text-align:right;">
+
+1.47
+
+</td>
+<td style="text-align:right;">
+
+100
+
+</td>
+<td style="text-align:right;">
+
+4.56
+
+</td>
+<td style="text-align:right;">
+
+8.95
+
+</td>
+<td style="text-align:right;">
+
+0.33
+
+</td>
+<td style="text-align:right;">
+
+10.51
+
+</td>
+<td style="text-align:right;">
+
+11.29
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+35
+
+</td>
+<td style="text-align:left;">
+
+9
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+D0
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:right;">
+
+5.30
+
+</td>
+<td style="text-align:right;">
+
+0.136
+
+</td>
+<td style="text-align:right;">
+
+1.00
+
+</td>
+<td style="text-align:right;">
+
+259
+
+</td>
+<td style="text-align:right;">
+
+9.96
+
+</td>
+<td style="text-align:right;">
+
+8.08
+
+</td>
+<td style="text-align:right;">
+
+0.45
+
+</td>
+<td style="text-align:right;">
+
+1.97
+
+</td>
+<td style="text-align:right;">
+
+2.27
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+21
+
+</td>
+<td style="text-align:left;">
+
+6
+
+</td>
+<td style="text-align:left;">
+
+Slope
 
 </td>
 <td style="text-align:left;">
@@ -833,7 +843,7 @@ Top
 </td>
 <td style="text-align:left;">
 
-T1
+S1
 
 </td>
 <td style="text-align:left;">
@@ -843,47 +853,47 @@ T1
 </td>
 <td style="text-align:right;">
 
-5.14
+4.57
 
 </td>
 <td style="text-align:right;">
 
-0.164
+0.102
 
 </td>
 <td style="text-align:right;">
 
-1.12
+1.37
 
 </td>
 <td style="text-align:right;">
 
-174
+156
 
 </td>
 <td style="text-align:right;">
 
-14.17
+8.58
 
 </td>
 <td style="text-align:right;">
 
-8.12
+9.92
 
 </td>
 <td style="text-align:right;">
 
-0.70
+0.63
 
 </td>
 <td style="text-align:right;">
 
-2.17
+3.67
 
 </td>
 <td style="text-align:right;">
 
-1.85
+3.24
 
 </td>
 </tr>
@@ -1193,10 +1203,10 @@ summary(Soils, maxsum = 12)
 
 Based on the information in the variables “contour”, “depth”, and
 “block.” I can see that the data are actually collected from 4 different
-block (1 to 4), and there are 3 different landscape in each block, which
+block (1 to 4), and there are 3 different Contour in each block, which
 are “top”, “slope” and “depression”.
 
-In each landscape of each block, soils are collected in 4 different soil
+In each Contour of each block, soils are collected in 4 different soil
 depth as described below.
 
 ![](https://raw.githubusercontent.com/KAR-NG/soil/main/pic1_block.png)
@@ -1231,10 +1241,102 @@ Remove leading and/or trailing white space from character strings.
 Soils <- Soils %>% 
   mutate(Block = as.factor(trimws(Block)),
          Contour = as.factor(trimws(Contour)),
-         Depth = as.factor(trimws(Depth)))
+         Depth = as.factor(trimws(Depth)))  
 ```
 
-# 4 VISUALISATION
+## 3.4 Rearrange levels
+
+Rearrange the sequence of levels in the factor variable “Contour” and
+“Depth”, so that they are in the right orders during visualisation.
+
+Current sequence of categories (technically known as “levels”) in the
+variable “Contour”:
+
+``` r
+levels(Soils$Contour)
+```
+
+    ## [1] "Depression" "Slope"      "Top"
+
+Current sequence of categories (technically known as “levels”) in the
+variable “Depth”:
+
+``` r
+levels(Soils$Depth)
+```
+
+    ## [1] "0-10"  "10-30" "30-60" "60-90"
+
+I will be reversing the order of these categories in “Contour” and
+“Depth”.
+
+Operation:
+
+``` r
+Soils <- Soils %>%
+  mutate(Contour = fct_relevel(Contour, "Top", "Slope", "Depression"),
+         Depth = fct_relevel(Depth, "60-90", "30-60", "10-30", "0-10"))
+```
+
+# 4 EXPLORATORY DATA ANALYSIS
+
+``` r
+soil.df <- Soils  %>% 
+  pivot_longer(c(4:12), names_to = "chemistry", values_to = "result") %>% 
+  mutate(chemistry = as.factor(chemistry),
+         chemistry = fct_relevel(chemistry, "pH", "Conduc", "Dens", "N", "P", "K", "Na", "Ca", "Mg")) 
+```
+
+## 4.1 Soil Chemistries against Soil Depth
+
+-   pH, N, P, K and Ca tends to be higher in the topsoils.
+-   Conductivity (Conduc), Soil density (Dens), Na, and Mg tends to be
+    higher in the subsoils.
+
+``` r
+ggplot(soil.df, aes(x = result, y = Depth)) +
+  geom_boxplot(outlier.shape = NA, shape = 21) +
+  geom_jitter(alpha = 0.5) +
+  facet_wrap(~chemistry, scales = "free") +
+  stat_summary(fun = "mean", shape = 4, size = 3, geom = "point") +
+  theme_bw() +
+  theme(legend.position = "none")
+```
+
+![](soil_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+## 4.2 Soil Chemistries against Contour
+
+-   The relationship between all soil chemistry and soil depth are
+    highly similar in 3 different contour.  
+-   At the “top” contour, topsoil K and Ca can be slightly higher than
+    the topsoils of other contours.  
+-   At the “Slope” contour, topsoil average N is the highest compared to
+    the topsoils of other contours.  
+-   At the “depression” contour, topsoil P is the highest.
+
+``` r
+ggplot(soil.df, aes(x = result, y = Depth, colour = Contour)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(alpha = 0.5) +
+  facet_grid(Contour~chemistry, scales = "free") +
+  stat_summary(fun = "mean", shape = 4, size = 3, geom = "point") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+```
+
+![](soil_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+## 4.3 PCA for characterisation
+
+Principal Component Analysis (PCA) is applied to understand the overall
+trends in the data set.
+
+Three different PCA plots are applied with data points grouped based on
+ellipses of “Block”, “Contour”, “Depth”.
+
+We can clearly see that data points are actually seperated based on soil
+depth. Therefore, graph 3 should be emphasized for interpretation.
 
 ``` r
 Soils
@@ -1289,3 +1391,67 @@ Soils
     ## 46     2 Depression 60-90 4.24 0.035 1.47 100  4.56  8.95 0.33 10.51  11.29
     ## 47     3 Depression 60-90 4.22 0.030 1.56  97  5.29  8.37 0.14  8.27   9.51
     ## 48     4 Depression 60-90 4.41 0.058 1.58 130  4.58  9.46 0.14  9.28  12.69
+
+``` r
+pca.res <- PCA(Soils, quali.sup = c(1,2,3), graph = F)
+
+
+fblock <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Block",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 1: PCA Biplot + Block Ellipse")
+
+fcontour <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Contour",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 2: PCA Biplot + Contour Ellipse")
+
+fdepth <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Depth",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 3: PCA Biplot + Depth Ellipse")
+
+
+grid.arrange(fblock, fcontour, fdepth)
+```
+
+![](soil_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+
+**Characterisation from Graph 3**
+
+-   First group identifiable is the cluster of Na, Dens (Density), and
+    Conduc (Conductivity) are positively correlated to each other. Three
+    of the variables will tend to increase together or decrease
+    together.
+
+-   Second group identifiable is the cluster of Na K, pH, Ca, N, and P
+    are positively correlated to each other. Three of the variables will
+    tend to increase together or decrease together.
+
+-   First and the second group have negative relation, meaning any
+    increase in a variable of a group will cause reduction of any
+    variable in the opposite group. For example, when calcium level (Ca)
+    increase, the sodium (Na) level will decrease because soils with
+    high calcium generally has better structure and therefore less
+    sodium level which is an element cause bad soil structure.
+
+-   Topsoils are generally characterised by higher level of K, pH, Ca, N
+    and P.
+
+-   With increasing of soil depths, soils will experience higher level
+    of Na, Density and conductivity with a trade off of K, pH, Ca, N and
+    P reduction.
+
+-   There is no interesting, clear trend of Mg in relation to soil
+    depths and other soil chemistry.
+
+# 5 STATISTICAL ANALYSIS

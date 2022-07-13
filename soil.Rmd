@@ -21,7 +21,9 @@ library(tidyverse)
 library(car)
 library(kableExtra)
 library(cowplot)
-
+library(gridExtra)
+library(factoextra)
+library(FactoMineR)
 
 ```
 
@@ -88,9 +90,9 @@ summary(Soils, maxsum = 12)
 
 ```
 
-Based on the information in the variables "contour", "depth", and "block." I can see that the data are actually collected from 4 different block (1 to 4), and there are 3 different landscape in each block, which are "top", "slope" and "depression". 
+Based on the information in the variables "contour", "depth", and "block." I can see that the data are actually collected from 4 different block (1 to 4), and there are 3 different Contour in each block, which are "top", "slope" and "depression". 
 
-In each landscape of each block, soils are collected in 4 different soil depth as described below.
+In each Contour of each block, soils are collected in 4 different soil depth as described below.
 
 ![](https://raw.githubusercontent.com/KAR-NG/soil/main/pic1_block.png)
 
@@ -124,19 +126,158 @@ Remove leading and/or trailing white space from character strings.
 Soils <- Soils %>% 
   mutate(Block = as.factor(trimws(Block)),
          Contour = as.factor(trimws(Contour)),
-         Depth = as.factor(trimws(Depth)))
+         Depth = as.factor(trimws(Depth)))  
+  
+
+
 
 ```
 
+## Rearrange levels
 
-# VISUALISATION
+Rearrange the sequence of levels in the factor variable "Contour" and "Depth", so that they are in the right orders during visualisation.
+
+Current sequence of categories (technically known as "levels") in the variable "Contour":
+
+```{r}
+levels(Soils$Contour)
+
+
+```
+Current sequence of categories (technically known as "levels") in the variable "Depth":
+
+```{r}
+levels(Soils$Depth)
+
+```
+
+I will be reversing the order of these categories in "Contour" and "Depth". 
+
+Operation:
+
+```{r}
+Soils <- Soils %>%
+  mutate(Contour = fct_relevel(Contour, "Top", "Slope", "Depression"),
+         Depth = fct_relevel(Depth, "60-90", "30-60", "10-30", "0-10"))
+  
+```
+
+
+# EXPLORATORY DATA ANALYSIS
+
 
 ```{r}
 
-Soils
+soil.df <- Soils  %>% 
+  pivot_longer(c(4:12), names_to = "chemistry", values_to = "result") %>% 
+  mutate(chemistry = as.factor(chemistry),
+         chemistry = fct_relevel(chemistry, "pH", "Conduc", "Dens", "N", "P", "K", "Na", "Ca", "Mg")) 
 
 
 ```
+
+
+## Soil Chemistries against Soil Depth
+
+* pH, N, P, K and Ca tends to be higher in the topsoils. 
+* Conductivity (Conduc), Soil density (Dens), Na, and Mg tends to be higher in the subsoils. 
+
+```{r, fig.height=8, fig.width=8}
+ggplot(soil.df, aes(x = result, y = Depth)) +
+  geom_boxplot(outlier.shape = NA, shape = 21) +
+  geom_jitter(alpha = 0.5) +
+  facet_wrap(~chemistry, scales = "free") +
+  stat_summary(fun = "mean", shape = 4, size = 3, geom = "point") +
+  theme_bw() +
+  theme(legend.position = "none")
+
+
+```
+
+## Soil Chemistries against Contour
+
+* The relationship between all soil chemistry and soil depth are highly similar in 3 different contour.     
+* At the "top" contour, topsoil K and Ca can be slightly higher than the topsoils of other contours.    
+* At the "Slope" contour, topsoil average N is the highest compared to the topsoils of other contours.    
+* At the "depression" contour, topsoil P is the highest.  
+
+```{r, fig.height=8, fig.width=10}
+ggplot(soil.df, aes(x = result, y = Depth, colour = Contour)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(alpha = 0.5) +
+  facet_grid(Contour~chemistry, scales = "free") +
+  stat_summary(fun = "mean", shape = 4, size = 3, geom = "point") +
+  theme_bw() +
+  theme(legend.position = "bottom")
+
+
+```
+
+
+## PCA for characterisation
+
+Principal Component Analysis (PCA) is applied to understand the overall trends in the data set.
+
+Three different PCA plots are applied with data points grouped based on ellipses of "Block", "Contour", "Depth". 
+
+We can clearly see that data points are actually seperated based on soil depth. Therefore, graph 3 should be emphasized for interpretation. 
+
+```{r}
+Soils
+
+```
+
+
+```{r, fig.height=14, fig.width=10}
+
+pca.res <- PCA(Soils, quali.sup = c(1,2,3), graph = F)
+
+
+fblock <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Block",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 1: PCA Biplot + Block Ellipse")
+
+fcontour <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Contour",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 2: PCA Biplot + Contour Ellipse")
+
+fdepth <- fviz_pca_biplot(pca.res, 
+                repel = T,
+                col.var = "black",
+                habillage =  "Depth",
+                mean.point = F,
+                addEllipses = T,
+                ellipse.type = "convex") + labs(title = "Graph 3: PCA Biplot + Depth Ellipse")
+
+
+grid.arrange(fblock, fcontour, fdepth)
+
+```
+
+**Characterisation from Graph 3**
+
+* First group  identifiable is the cluster of Na, Dens (Density), and Conduc (Conductivity) are positively correlated to each other. Three of the variables will tend to increase together or decrease together.
+
+* Second group identifiable is the cluster of Na K, pH, Ca, N, and P are positively correlated to each other. Three of the variables will tend to increase together or decrease together.
+
+* First and the second group have negative relation, meaning any increase in a variable of a group will cause reduction of any variable in the opposite group. For example, when calcium level (Ca) increase, the sodium (Na) level will decrease because soils with high calcium generally has better structure and therefore less sodium level which is an element cause bad soil structure.
+
+* Topsoils are generally characterised by higher level of K, pH, Ca, N and P. 
+
+* With increasing of soil depths, soils will experience higher level of Na, Density and conductivity with a trade off of K, pH, Ca, N and P reduction. 
+
+* There is no interesting, clear trend of Mg in relation to soil depths and other soil chemistry. 
+
+
+# STATISTICAL ANALYSIS
 
 
 
