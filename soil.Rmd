@@ -1,5 +1,5 @@
 ---
-title: "Soil Profile Data Mining and Statistical Analysis"
+title: "Soil Profile Statistical Analysis"
 author: "Kar"
 date: '2022-07'
 output:
@@ -81,11 +81,63 @@ There is no missing value in the data set.
 ```{r}
 colSums(is.na(Soils))
 ```
+Summarising the data:
 
 ```{r}
 summary(Soils, maxsum = 12)
 
 ```
+
+Based on the information in the variables "contour", "depth", and "block." I can see that the data are actually collected from 4 different block (1 to 4), and there are 3 different landscape in each block, which are "top", "slope" and "depression". 
+
+In each landscape of each block, soils are collected in 4 different soil depth as described below.
+
+![](https://raw.githubusercontent.com/KAR-NG/soil/main/pic1_block.png)
+
+
+# DATA CLEANING
+
+## Removing Group and Gp
+
+Group and Gp are duplicates of each other, however, I will remove them because they are not the best representation (though not bad) of the information, from my experience as an environmental consultant specialised in soil science. I will create an alternative of them if required. 
+
+```{r}
+Soils <- Soils %>% dplyr::select(-Group, -Gp)
+
+```
+
+## Rearrange
+
+This step is optional. I am relocating "Block" to be the first column
+
+```{r}
+Soils <- Soils %>% relocate(Block, .before = Contour)
+  
+```
+
+## Trimming
+
+Remove leading and/or trailing white space from character strings.
+
+```{r}
+
+Soils <- Soils %>% 
+  mutate(Block = as.factor(trimws(Block)),
+         Contour = as.factor(trimws(Contour)),
+         Depth = as.factor(trimws(Depth)))
+
+```
+
+
+# VISUALISATION
+
+```{r}
+
+Soils
+
+
+```
+
 
 
 
