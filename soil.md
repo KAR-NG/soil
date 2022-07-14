@@ -14,11 +14,12 @@ Kar
     -   [3.3 Trimming](#33-trimming)
     -   [3.4 Rearrange levels](#34-rearrange-levels)
 -   [4 EXPLORATORY DATA ANALYSIS](#4-exploratory-data-analysis)
-    -   [4.1 Soil Chemistries against Soil
-        Depth](#41-soil-chemistries-against-soil-depth)
-    -   [4.2 Soil Chemistries against
-        Contour](#42-soil-chemistries-against-contour)
-    -   [4.3 PCA for characterisation](#43-pca-for-characterisation)
+    -   [4.1 Univariate histogram](#41-univariate-histogram)
+    -   [4.2 Soil Chemistries against Soil
+        Depth](#42-soil-chemistries-against-soil-depth)
+    -   [4.3 Soil Chemistries against
+        Contour](#43-soil-chemistries-against-contour)
+    -   [4.4 PCA for characterisation](#44-pca-for-characterisation)
 -   [5 STATISTICAL ANALYSIS](#5-statistical-analysis)
 
 ------------------------------------------------------------------------
@@ -130,469 +131,7 @@ Conduc
 <tr>
 <td style="text-align:left;">
 
-41
-
-</td>
-<td style="text-align:left;">
-
-11
-
-</td>
-<td style="text-align:left;">
-
-Depression
-
-</td>
-<td style="text-align:left;">
-
-30-60
-
-</td>
-<td style="text-align:left;">
-
-D3
-
-</td>
-<td style="text-align:left;">
-
-1
-
-</td>
-<td style="text-align:right;">
-
-3.94
-
-</td>
-<td style="text-align:right;">
-
-0.054
-
-</td>
-<td style="text-align:right;">
-
-1.60
-
-</td>
-<td style="text-align:right;">
-
-148
-
-</td>
-<td style="text-align:right;">
-
-4.85
-
-</td>
-<td style="text-align:right;">
-
-9.62
-
-</td>
-<td style="text-align:right;">
-
-0.18
-
-</td>
-<td style="text-align:right;">
-
-7.20
-
-</td>
-<td style="text-align:right;">
-
-10.14
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-1
-
-</td>
-<td style="text-align:left;">
-
-1
-
-</td>
-<td style="text-align:left;">
-
-Top
-
-</td>
-<td style="text-align:left;">
-
-0-10
-
-</td>
-<td style="text-align:left;">
-
-T0
-
-</td>
-<td style="text-align:left;">
-
-1
-
-</td>
-<td style="text-align:right;">
-
-5.40
-
-</td>
-<td style="text-align:right;">
-
-0.188
-
-</td>
-<td style="text-align:right;">
-
-0.92
-
-</td>
-<td style="text-align:right;">
-
-215
-
-</td>
-<td style="text-align:right;">
-
-16.35
-
-</td>
-<td style="text-align:right;">
-
-7.65
-
-</td>
-<td style="text-align:right;">
-
-0.72
-
-</td>
-<td style="text-align:right;">
-
-1.14
-
-</td>
-<td style="text-align:right;">
-
-1.09
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-48
-
-</td>
-<td style="text-align:left;">
-
-12
-
-</td>
-<td style="text-align:left;">
-
-Depression
-
-</td>
-<td style="text-align:left;">
-
-60-90
-
-</td>
-<td style="text-align:left;">
-
-D6
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-4.41
-
-</td>
-<td style="text-align:right;">
-
-0.058
-
-</td>
-<td style="text-align:right;">
-
-1.58
-
-</td>
-<td style="text-align:right;">
-
-130
-
-</td>
-<td style="text-align:right;">
-
-4.58
-
-</td>
-<td style="text-align:right;">
-
-9.46
-
-</td>
-<td style="text-align:right;">
-
-0.14
-
-</td>
-<td style="text-align:right;">
-
-9.28
-
-</td>
-<td style="text-align:right;">
-
-12.69
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-16
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:left;">
-
-Top
-
-</td>
-<td style="text-align:left;">
-
-60-90
-
-</td>
-<td style="text-align:left;">
-
-T6
-
-</td>
-<td style="text-align:left;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-3.74
-
-</td>
-<td style="text-align:right;">
-
-0.053
-
-</td>
-<td style="text-align:right;">
-
-1.40
-
-</td>
-<td style="text-align:right;">
-
-79
-
-</td>
-<td style="text-align:right;">
-
-5.86
-
-</td>
-<td style="text-align:right;">
-
-10.14
-
-</td>
-<td style="text-align:right;">
-
-0.41
-
-</td>
-<td style="text-align:right;">
-
-11.04
-
-</td>
-<td style="text-align:right;">
-
-12.15
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-47
-
-</td>
-<td style="text-align:left;">
-
-12
-
-</td>
-<td style="text-align:left;">
-
-Depression
-
-</td>
-<td style="text-align:left;">
-
-60-90
-
-</td>
-<td style="text-align:left;">
-
-D6
-
-</td>
-<td style="text-align:left;">
-
-3
-
-</td>
-<td style="text-align:right;">
-
-4.22
-
-</td>
-<td style="text-align:right;">
-
-0.030
-
-</td>
-<td style="text-align:right;">
-
-1.56
-
-</td>
-<td style="text-align:right;">
-
-97
-
-</td>
-<td style="text-align:right;">
-
-5.29
-
-</td>
-<td style="text-align:right;">
-
-8.37
-
-</td>
-<td style="text-align:right;">
-
-0.14
-
-</td>
-<td style="text-align:right;">
-
-8.27
-
-</td>
-<td style="text-align:right;">
-
-9.51
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-19
-
-</td>
-<td style="text-align:left;">
-
-5
-
-</td>
-<td style="text-align:left;">
-
-Slope
-
-</td>
-<td style="text-align:left;">
-
-0-10
-
-</td>
-<td style="text-align:left;">
-
-S0
-
-</td>
-<td style="text-align:left;">
-
-3
-
-</td>
-<td style="text-align:right;">
-
-5.61
-
-</td>
-<td style="text-align:right;">
-
-0.145
-
-</td>
-<td style="text-align:right;">
-
-1.10
-
-</td>
-<td style="text-align:right;">
-
-242
-
-</td>
-<td style="text-align:right;">
-
-9.66
-
-</td>
-<td style="text-align:right;">
-
-6.76
-
-</td>
-<td style="text-align:right;">
-
-0.63
-
-</td>
-<td style="text-align:right;">
-
-1.01
-
-</td>
-<td style="text-align:right;">
-
-0.76
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-22
+21
 
 </td>
 <td style="text-align:left;">
@@ -617,27 +156,27 @@ S1
 </td>
 <td style="text-align:left;">
 
-2
+1
 
 </td>
 <td style="text-align:right;">
 
-5.11
+4.57
 
 </td>
 <td style="text-align:right;">
 
-0.097
+0.102
 
 </td>
 <td style="text-align:right;">
 
-1.30
+1.37
 
 </td>
 <td style="text-align:right;">
 
-139
+156
 
 </td>
 <td style="text-align:right;">
@@ -647,99 +186,22 @@ S1
 </td>
 <td style="text-align:right;">
 
-8.69
+9.92
 
 </td>
 <td style="text-align:right;">
 
-0.42
+0.63
 
 </td>
 <td style="text-align:right;">
 
-4.70
+3.67
 
 </td>
 <td style="text-align:right;">
 
-4.63
-
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-
-46
-
-</td>
-<td style="text-align:left;">
-
-12
-
-</td>
-<td style="text-align:left;">
-
-Depression
-
-</td>
-<td style="text-align:left;">
-
-60-90
-
-</td>
-<td style="text-align:left;">
-
-D6
-
-</td>
-<td style="text-align:left;">
-
-2
-
-</td>
-<td style="text-align:right;">
-
-4.24
-
-</td>
-<td style="text-align:right;">
-
-0.035
-
-</td>
-<td style="text-align:right;">
-
-1.47
-
-</td>
-<td style="text-align:right;">
-
-100
-
-</td>
-<td style="text-align:right;">
-
-4.56
-
-</td>
-<td style="text-align:right;">
-
-8.95
-
-</td>
-<td style="text-align:right;">
-
-0.33
-
-</td>
-<td style="text-align:right;">
-
-10.51
-
-</td>
-<td style="text-align:right;">
-
-11.29
+3.24
 
 </td>
 </tr>
@@ -823,17 +285,17 @@ D0
 <tr>
 <td style="text-align:left;">
 
-21
+39
 
 </td>
 <td style="text-align:left;">
 
-6
+10
 
 </td>
 <td style="text-align:left;">
 
-Slope
+Depression
 
 </td>
 <td style="text-align:left;">
@@ -843,7 +305,392 @@ Slope
 </td>
 <td style="text-align:left;">
 
-S1
+D1
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:right;">
+
+4.79
+
+</td>
+<td style="text-align:right;">
+
+0.047
+
+</td>
+<td style="text-align:right;">
+
+1.46
+
+</td>
+<td style="text-align:right;">
+
+121
+
+</td>
+<td style="text-align:right;">
+
+6.99
+
+</td>
+<td style="text-align:right;">
+
+9.91
+
+</td>
+<td style="text-align:right;">
+
+0.30
+
+</td>
+<td style="text-align:right;">
+
+5.15
+
+</td>
+<td style="text-align:right;">
+
+6.82
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+28
+
+</td>
+<td style="text-align:left;">
+
+7
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+S3
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+4.99
+
+</td>
+<td style="text-align:right;">
+
+0.048
+
+</td>
+<td style="text-align:right;">
+
+1.46
+
+</td>
+<td style="text-align:right;">
+
+97
+
+</td>
+<td style="text-align:right;">
+
+7.49
+
+</td>
+<td style="text-align:right;">
+
+9.38
+
+</td>
+<td style="text-align:right;">
+
+0.40
+
+</td>
+<td style="text-align:right;">
+
+9.70
+
+</td>
+<td style="text-align:right;">
+
+9.13
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+12
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+T3
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+3.89
+
+</td>
+<td style="text-align:right;">
+
+0.070
+
+</td>
+<td style="text-align:right;">
+
+1.42
+
+</td>
+<td style="text-align:right;">
+
+117
+
+</td>
+<td style="text-align:right;">
+
+6.61
+
+</td>
+<td style="text-align:right;">
+
+9.76
+
+</td>
+<td style="text-align:right;">
+
+0.41
+
+</td>
+<td style="text-align:right;">
+
+8.30
+
+</td>
+<td style="text-align:right;">
+
+9.21
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+18
+
+</td>
+<td style="text-align:left;">
+
+5
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+S0
+
+</td>
+<td style="text-align:left;">
+
+2
+
+</td>
+<td style="text-align:right;">
+
+5.46
+
+</td>
+<td style="text-align:right;">
+
+0.298
+
+</td>
+<td style="text-align:right;">
+
+0.96
+
+</td>
+<td style="text-align:right;">
+
+300
+
+</td>
+<td style="text-align:right;">
+
+12.30
+
+</td>
+<td style="text-align:right;">
+
+7.50
+
+</td>
+<td style="text-align:right;">
+
+0.68
+
+</td>
+<td style="text-align:right;">
+
+2.00
+
+</td>
+<td style="text-align:right;">
+
+1.98
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+44
+
+</td>
+<td style="text-align:left;">
+
+11
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+D3
+
+</td>
+<td style="text-align:left;">
+
+4
+
+</td>
+<td style="text-align:right;">
+
+4.64
+
+</td>
+<td style="text-align:right;">
+
+0.065
+
+</td>
+<td style="text-align:right;">
+
+1.46
+
+</td>
+<td style="text-align:right;">
+
+152
+
+</td>
+<td style="text-align:right;">
+
+4.43
+
+</td>
+<td style="text-align:right;">
+
+10.54
+
+</td>
+<td style="text-align:right;">
+
+0.22
+
+</td>
+<td style="text-align:right;">
+
+7.61
+
+</td>
+<td style="text-align:right;">
+
+9.09
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+33
+
+</td>
+<td style="text-align:left;">
+
+9
+
+</td>
+<td style="text-align:left;">
+
+Depression
+
+</td>
+<td style="text-align:left;">
+
+0-10
+
+</td>
+<td style="text-align:left;">
+
+D0
 
 </td>
 <td style="text-align:left;">
@@ -853,47 +700,201 @@ S1
 </td>
 <td style="text-align:right;">
 
-4.57
+5.24
 
 </td>
 <td style="text-align:right;">
 
-0.102
+0.194
 
 </td>
 <td style="text-align:right;">
 
-1.37
+1.00
 
 </td>
 <td style="text-align:right;">
 
-156
+445
 
 </td>
 <td style="text-align:right;">
 
-8.58
+12.27
 
 </td>
 <td style="text-align:right;">
 
-9.92
+6.27
 
 </td>
 <td style="text-align:right;">
 
-0.63
+0.72
 
 </td>
 <td style="text-align:right;">
 
-3.67
+1.02
 
 </td>
 <td style="text-align:right;">
 
-3.24
+0.75
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+11
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:left;">
+
+Top
+
+</td>
+<td style="text-align:left;">
+
+30-60
+
+</td>
+<td style="text-align:left;">
+
+T3
+
+</td>
+<td style="text-align:left;">
+
+3
+
+</td>
+<td style="text-align:right;">
+
+4.17
+
+</td>
+<td style="text-align:right;">
+
+0.078
+
+</td>
+<td style="text-align:right;">
+
+1.26
+
+</td>
+<td style="text-align:right;">
+
+112
+
+</td>
+<td style="text-align:right;">
+
+6.29
+
+</td>
+<td style="text-align:right;">
+
+7.95
+
+</td>
+<td style="text-align:right;">
+
+0.26
+
+</td>
+<td style="text-align:right;">
+
+5.30
+
+</td>
+<td style="text-align:right;">
+
+8.37
+
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+
+29
+
+</td>
+<td style="text-align:left;">
+
+8
+
+</td>
+<td style="text-align:left;">
+
+Slope
+
+</td>
+<td style="text-align:left;">
+
+60-90
+
+</td>
+<td style="text-align:left;">
+
+S6
+
+</td>
+<td style="text-align:left;">
+
+1
+
+</td>
+<td style="text-align:right;">
+
+3.80
+
+</td>
+<td style="text-align:right;">
+
+0.049
+
+</td>
+<td style="text-align:right;">
+
+1.48
+
+</td>
+<td style="text-align:right;">
+
+108
+
+</td>
+<td style="text-align:right;">
+
+3.82
+
+</td>
+<td style="text-align:right;">
+
+8.80
+
+</td>
+<td style="text-align:right;">
+
+0.24
+
+</td>
+<td style="text-align:right;">
+
+9.57
+
+</td>
+<td style="text-align:right;">
+
+11.57
 
 </td>
 </tr>
@@ -1287,7 +1288,50 @@ soil.df <- Soils  %>%
          chemistry = fct_relevel(chemistry, "pH", "Conduc", "Dens", "N", "P", "K", "Na", "Ca", "Mg")) 
 ```
 
-## 4.1 Soil Chemistries against Soil Depth
+## 4.1 Univariate histogram
+
+Following shows the graphs for each variables in the data set.
+
+``` r
+g1 <- soil.df %>% group_by(Block) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Block, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Block Categories")
+
+g2 <- soil.df %>% group_by(Contour) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Contour, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Contour Categories")
+
+g3 <- soil.df %>% group_by(Depth) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Depth, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Depth Categories")
+
+g4 <- ggplot(soil.df, aes(x = result, fill = chemistry)) +
+  geom_histogram(color = "black") +
+  facet_wrap(~chemistry, scales = "free") +
+  ggtitle("Histogram")
+
+top <- plot_grid(g1, g2, g3, ncol = 3)
+plot_grid(top, g4, ncol = 1, rel_heights = c(1,2))
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+![](soil_files/figure-gfm/unnamed-chunk-14-1.png)<!-- --> **Insights**
+
+-   Based on the top bar chart, the sample size is balanced for all
+    factor variables “Block”, “Contour”, and “Depth”.
+
+-   All soils have slight to strongly acidic pH.
+
+-   Many soils have high density
+
+-   There is no obvious normal distribution in each histogram and it is
+    likely due to the effect of different soil depth, block, and
+    contour.
+
+Let’s find it out.
+
+## 4.2 Soil Chemistries against Soil Depth
 
 -   pH, N, P, K and Ca tends to be higher in the topsoils.
 -   Conductivity (Conduc), Soil density (Dens), Na, and Mg tends to be
@@ -1303,9 +1347,9 @@ ggplot(soil.df, aes(x = result, y = Depth)) +
   theme(legend.position = "none")
 ```
 
-![](soil_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](soil_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
-## 4.2 Soil Chemistries against Contour
+## 4.3 Soil Chemistries against Contour
 
 -   The relationship between all soil chemistry and soil depth are
     highly similar in 3 different contour.  
@@ -1325,9 +1369,9 @@ ggplot(soil.df, aes(x = result, y = Depth, colour = Contour)) +
   theme(legend.position = "bottom")
 ```
 
-![](soil_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](soil_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
-## 4.3 PCA for characterisation
+## 4.4 PCA for characterisation
 
 Principal Component Analysis (PCA) is applied to understand the overall
 trends in the data set.
@@ -1424,7 +1468,7 @@ fdepth <- fviz_pca_biplot(pca.res,
 grid.arrange(fblock, fcontour, fdepth)
 ```
 
-![](soil_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](soil_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 **Characterisation from Graph 3**
 
@@ -1455,3 +1499,57 @@ grid.arrange(fblock, fcontour, fdepth)
     depths and other soil chemistry.
 
 # 5 STATISTICAL ANALYSIS
+
+``` r
+Soils  
+```
+
+    ##    Block    Contour Depth   pH     N Dens   P    Ca    Mg    K    Na Conduc
+    ## 1      1        Top  0-10 5.40 0.188 0.92 215 16.35  7.65 0.72  1.14   1.09
+    ## 2      2        Top  0-10 5.65 0.165 1.04 208 12.25  5.15 0.71  0.94   1.35
+    ## 3      3        Top  0-10 5.14 0.260 0.95 300 13.02  5.68 0.68  0.60   1.41
+    ## 4      4        Top  0-10 5.14 0.169 1.10 248 11.92  7.88 1.09  1.01   1.64
+    ## 5      1        Top 10-30 5.14 0.164 1.12 174 14.17  8.12 0.70  2.17   1.85
+    ## 6      2        Top 10-30 5.10 0.094 1.22 129  8.55  6.92 0.81  2.67   3.18
+    ## 7      3        Top 10-30 4.70 0.100 1.52 117  8.74  8.16 0.39  3.32   4.16
+    ## 8      4        Top 10-30 4.46 0.112 1.47 170  9.49  9.16 0.70  3.76   5.14
+    ## 9      1        Top 30-60 4.37 0.112 1.07 121  8.85 10.35 0.74  5.74   5.73
+    ## 10     2        Top 30-60 4.39 0.058 1.54 115  4.73  6.91 0.77  5.85   6.45
+    ## 11     3        Top 30-60 4.17 0.078 1.26 112  6.29  7.95 0.26  5.30   8.37
+    ## 12     4        Top 30-60 3.89 0.070 1.42 117  6.61  9.76 0.41  8.30   9.21
+    ## 13     1        Top 60-90 3.88 0.077 1.25 127  6.41 10.96 0.56  9.67  10.64
+    ## 14     2        Top 60-90 4.07 0.046 1.54  91  3.82  6.61 0.50  7.67  10.07
+    ## 15     3        Top 60-90 3.88 0.055 1.53  91  4.98  8.00 0.23  8.78  11.26
+    ## 16     4        Top 60-90 3.74 0.053 1.40  79  5.86 10.14 0.41 11.04  12.15
+    ## 17     1      Slope  0-10 5.11 0.247 0.94 261 13.25  7.55 0.61  1.86   2.61
+    ## 18     2      Slope  0-10 5.46 0.298 0.96 300 12.30  7.50 0.68  2.00   1.98
+    ## 19     3      Slope  0-10 5.61 0.145 1.10 242  9.66  6.76 0.63  1.01   0.76
+    ## 20     4      Slope  0-10 5.85 0.186 1.20 229 13.78  7.12 0.62  3.09   2.85
+    ## 21     1      Slope 10-30 4.57 0.102 1.37 156  8.58  9.92 0.63  3.67   3.24
+    ## 22     2      Slope 10-30 5.11 0.097 1.30 139  8.58  8.69 0.42  4.70   4.63
+    ## 23     3      Slope 10-30 4.78 0.122 1.30 214  8.22  7.75 0.32  3.07   3.67
+    ## 24     4      Slope 10-30 6.67 0.083 1.42 132 12.68  9.56 0.55  8.30   8.10
+    ## 25     1      Slope 30-60 3.96 0.059 1.53  98  4.80 10.00 0.36  6.52   7.72
+    ## 26     2      Slope 30-60 4.00 0.050 1.50 115  5.06  8.91 0.28  7.91   9.78
+    ## 27     3      Slope 30-60 4.12 0.086 1.55 148  6.16  7.58 0.16  6.39   9.07
+    ## 28     4      Slope 30-60 4.99 0.048 1.46  97  7.49  9.38 0.40  9.70   9.13
+    ## 29     1      Slope 60-90 3.80 0.049 1.48 108  3.82  8.80 0.24  9.57  11.57
+    ## 30     2      Slope 60-90 3.96 0.036 1.28 103  4.78  7.29 0.24  9.67  11.42
+    ## 31     3      Slope 60-90 3.93 0.048 1.42 109  4.93  7.47 0.14  9.65  13.32
+    ## 32     4      Slope 60-90 4.02 0.039 1.51 100  5.66  8.84 0.37 10.54  11.57
+    ## 33     1 Depression  0-10 5.24 0.194 1.00 445 12.27  6.27 0.72  1.02   0.75
+    ## 34     2 Depression  0-10 5.20 0.256 0.78 380 11.39  7.55 0.78  1.63   2.20
+    ## 35     3 Depression  0-10 5.30 0.136 1.00 259  9.96  8.08 0.45  1.97   2.27
+    ## 36     4 Depression  0-10 5.67 0.127 1.13 248  9.12  7.04 0.55  1.43   0.67
+    ## 37     1 Depression 10-30 4.46 0.087 1.24 276  7.24  9.40 0.43  4.17   5.08
+    ## 38     2 Depression 10-30 4.91 0.092 1.47 158  7.37 10.57 0.59  5.07   6.37
+    ## 39     3 Depression 10-30 4.79 0.047 1.46 121  6.99  9.91 0.30  5.15   6.82
+    ## 40     4 Depression 10-30 5.36 0.095 1.26 195  8.59  8.66 0.48  4.17   3.65
+    ## 41     1 Depression 30-60 3.94 0.054 1.60 148  4.85  9.62 0.18  7.20  10.14
+    ## 42     2 Depression 30-60 4.52 0.051 1.53 115  6.34  9.78 0.34  8.52   9.74
+    ## 43     3 Depression 30-60 4.35 0.032 1.55  82  5.99  9.73 0.22  7.02   8.60
+    ## 44     4 Depression 30-60 4.64 0.065 1.46 152  4.43 10.54 0.22  7.61   9.09
+    ## 45     1 Depression 60-90 3.82 0.038 1.40 105  4.65  9.85 0.18 10.15  12.26
+    ## 46     2 Depression 60-90 4.24 0.035 1.47 100  4.56  8.95 0.33 10.51  11.29
+    ## 47     3 Depression 60-90 4.22 0.030 1.56  97  5.29  8.37 0.14  8.27   9.51
+    ## 48     4 Depression 60-90 4.41 0.058 1.58 130  4.58  9.46 0.14  9.28  12.69

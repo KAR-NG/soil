@@ -177,6 +177,45 @@ soil.df <- Soils  %>%
 ```
 
 
+## Univariate histogram
+
+Following shows the graphs for each variables in the data set. 
+
+```{r,fig.width=14, fig.height=12}
+
+g1 <- soil.df %>% group_by(Block) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Block, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Block Categories")
+
+g2 <- soil.df %>% group_by(Contour) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Contour, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Contour Categories")
+
+g3 <- soil.df %>% group_by(Depth) %>% summarise(count = n()) %>% 
+  ggplot(aes(x = Depth, y = count)) + geom_bar(stat = "identity") + geom_label(aes(label = count)) +
+  ggtitle("Sample sizes of Depth Categories")
+
+g4 <- ggplot(soil.df, aes(x = result, fill = chemistry)) +
+  geom_histogram(color = "black") +
+  facet_wrap(~chemistry, scales = "free") +
+  ggtitle("Histogram")
+
+top <- plot_grid(g1, g2, g3, ncol = 3)
+plot_grid(top, g4, ncol = 1, rel_heights = c(1,2))
+
+```
+**Insights**
+
+* Based on the top bar chart, the sample size is balanced for all factor variables "Block", "Contour", and "Depth".
+
+* All soils have slight to strongly acidic pH.
+
+* Many soils have high density
+
+* There is no obvious normal distribution in each histogram and it is likely due to the effect of different soil depth, block, and contour. 
+
+Let's find it out. 
+
 ## Soil Chemistries against Soil Depth
 
 * pH, N, P, K and Ca tends to be higher in the topsoils. 
@@ -228,7 +267,7 @@ Soils
 ```
 
 
-```{r, fig.height=14, fig.width=10}
+```{r, fig.height=16, fig.width=10}
 
 pca.res <- PCA(Soils, quali.sup = c(1,2,3), graph = F)
 
@@ -279,6 +318,14 @@ grid.arrange(fblock, fcontour, fdepth)
 
 # STATISTICAL ANALYSIS
 
+
+```{r}
+
+Soils  
+
+
+
+```
 
 
 
