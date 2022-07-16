@@ -318,14 +318,56 @@ grid.arrange(fblock, fcontour, fdepth)
 
 # STATISTICAL ANALYSIS
 
+## MANOVA
+
+MANOVA (multivariate analysis of variance) will be applied to investigate is there a holistic statistical difference among each categories of each factor variables, based on a combined view all soil chemistry in the data set. Technically, MANOVA compares multivariate mean between each level of each categorical variables.
+
+Terminology in data science: "Level" refers the categories within a factor variable. Factor variable is a variable with categorical groups, for example the "soil depth" has 4 **levels**, which are:
 
 ```{r}
-
-Soils  
-
-
+levels(Soils$Depth)
 
 ```
+Or the contour variable has 3 **levels**, which are:
+
+```{r}
+levels(Soils$Contour)
+```
+
+There are 4 null hypotheses to test:
+
+**Null hypothesis 1:** There is no difference in the multivariate mean among the levels of "Block".      
+**Null hypothesis 2:** There is no difference in the multivariate mean among the levels of "Contour".       
+**Null hypothesis 3:** There is no difference in the multivariate mean among the levels of "Depth".      
+**Null hypothesis 4:** There is no difference in the multivariate mean among the interaction levels between "Depth" and "Contour".  
+
+Based on following linear model output, there is no statistical influence from the interaction term (Depth*Contour) on the 9 dependent variables - pH, N, Dens, P, Ca, Mg, K, Na, and Conduc. Therefore, type II sum of squared will be used to test MANOVA null hypotheses. 
+
+```{r}
+soil.lm <- lm(cbind(pH, N, Dens, P, Ca, Mg, K, Na, Conduc) ~ 
+                           Block + Contour*Depth, 
+                 data = Soils)
+
+summary(soil.lm)
+
+```
+
+Following show the outputs of statistical results based on 4 different statistical test. Guide: "Pillai" is the default test of R because it is recognised as the most robust test.
+
+```{r}
+Manova(soil.lm, type = "II", test = "Pillai")
+Manova(soil.lm, type = "II", test = "Wilks")
+Manova(soil.lm, type = "II", test = "Hotelling-Lawley")
+Manova(soil.lm, type = "II", test = "Roy")
+
+```
+
+
+
+
+
+
+
 
 
 
